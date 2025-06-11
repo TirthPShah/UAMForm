@@ -950,7 +950,8 @@ export default function ComprehensiveFormPage() {
                     <FormMessage />
                   </FormItem>
                 )} />
-                <FormField control={control} name={`childrenOver18.${index}.profession`} render={({ field }) => ( <FormItem> <FormLabel>Profession (e.g., Student, Engineer)</FormLabel> <FormControl><Input placeholder="Profession" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
+                <FormField control={control} name={`childrenOver18.${index}.designation`} render={({ field }) => ( <FormItem> <FormLabel>Designation*</FormLabel> <FormControl><Input placeholder="Designation/title" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
+                <FormField control={control} name={`childrenOver18.${index}.profession`} render={({ field }) => ( <FormItem> <FormLabel>Profession (e.g., Education, Engineering)</FormLabel> <FormControl><Input placeholder="Profession" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
                 <FormField control={control} name={`childrenOver18.${index}.professionOrgName`} render={({ field }) => ( <FormItem> <FormLabel>Organisation/Institution Name</FormLabel> <FormControl><Input placeholder="Organisation Name" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
                 <FormField control={control} name={`childrenOver18.${index}.professionOrgAddress`} render={({ field }) => ( <FormItem> <FormLabel>Profession Address</FormLabel> <FormControl><Textarea placeholder="Address of workplace/institution" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
                 <FormField control={control} name={`childrenOver18.${index}.maritalStatus`} render={({ field }) => (
@@ -977,7 +978,18 @@ export default function ComprehensiveFormPage() {
                 <FormField control={control} name={`childrenOver18.${index}.email`} render={({ field }) => ( <FormItem> <FormLabel>Email</FormLabel> <FormControl><Input type="email" placeholder="Email Address" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
               </Card>
             ))}
-            <Button type="button" variant="outline" onClick={() => appendChildOver18({ name: '', dob: undefined, gender: 'Male', profession: '', professionOrgName: '', professionOrgAddress: '', maritalStatus: undefined, mobile: '', email: '' })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Over 18)</Button>
+            <Button type="button" variant="outline" onClick={() => appendChildOver18({ 
+              name: '', 
+              dob: undefined, 
+              gender: 'Male', 
+              designation: '', 
+              profession: '', 
+              professionOrgName: '', 
+              professionOrgAddress: '', 
+              maritalStatus: undefined, 
+              mobile: '', 
+              email: '' 
+            })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Over 18)</Button>
             {childrenOver18Fields.length === 0 && <p className="text-muted-foreground text-center p-4">No children over 18 added yet.</p>}
           </div>
         );

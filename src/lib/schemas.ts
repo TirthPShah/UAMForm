@@ -14,6 +14,7 @@ export interface ChildOver18 {
   name?: string;
   dob?: Date;
   gender?: 'Male' | 'Female' | 'Other';
+  designation?: string;
   profession?: string;
   professionOrgName?: string;
   professionOrgAddress?: string;
