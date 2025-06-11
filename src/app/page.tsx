@@ -169,9 +169,258 @@ const steps = [
   }
 ];
 
-const countryOptions = ["India", "USA", "Canada", "UK", "Australia", "Other"];
+// all country options
+const countryOptions = [	"Afghanistan",
+	"Albania",
+	"Algeria",
+	"American Samoa",
+	"Andorra",
+	"Angola",
+	"Anguilla",
+	"Antarctica",
+	"Antigua and Barbuda",
+	"Argentina",
+	"Armenia",
+	"Aruba",
+	"Australia",
+	"Austria",
+	"Azerbaijan",
+	"Bahamas (the)",
+	"Bahrain",
+	"Bangladesh",
+	"Barbados",
+	"Belarus",
+	"Belgium",
+	"Belize",
+	"Benin",
+	"Bermuda",
+	"Bhutan",
+	"Bolivia (Plurinational State of)",
+	"Bonaire, Sint Eustatius and Saba",
+	"Bosnia and Herzegovina",
+	"Botswana",
+	"Bouvet Island",
+	"Brazil",
+	"British Indian Ocean Territory (the)",
+	"Brunei Darussalam",
+	"Bulgaria",
+	"Burkina Faso",
+	"Burundi",
+	"Cabo Verde",
+	"Cambodia",
+	"Cameroon",
+	"Canada",
+	"Cayman Islands (the)",
+	"Central African Republic (the)",
+	"Chad",
+	"Chile",
+	"China",
+	"Christmas Island",
+	"Cocos (Keeling) Islands (the)",
+	"Colombia",
+	"Comoros (the)",
+	"Congo (the Democratic Republic of the)",
+	"Congo (the)",
+	"Cook Islands (the)",
+	"Costa Rica",
+	"Croatia",
+	"Cuba",
+	"Curaçao",
+	"Cyprus",
+	"Czechia",
+	"Côte d'Ivoire",
+	"Denmark",
+	"Djibouti",
+	"Dominica",
+	"Dominican Republic (the)",
+	"Ecuador",
+	"Egypt",
+	"El Salvador",
+	"Equatorial Guinea",
+	"Eritrea",
+	"Estonia",
+	"Eswatini",
+	"Ethiopia",
+	"Falkland Islands (the) [Malvinas]",
+	"Faroe Islands (the)",
+	"Fiji",
+	"Finland",
+	"France",
+	"French Guiana",
+	"French Polynesia",
+	"French Southern Territories (the)",
+	"Gabon",
+	"Gambia (the)",
+	"Georgia",
+	"Germany",
+	"Ghana",
+	"Gibraltar",
+	"Greece",
+	"Greenland",
+	"Grenada",
+	"Guadeloupe",
+	"Guam",
+	"Guatemala",
+	"Guernsey",
+	"Guinea",
+	"Guinea-Bissau",
+	"Guyana",
+	"Haiti",
+	"Heard Island and McDonald Islands",
+	"Holy See (the)",
+	"Honduras",
+	"Hong Kong",
+	"Hungary",
+	"Iceland",
+	"India",
+	"Indonesia",
+	"Iran (Islamic Republic of)",
+	"Iraq",
+	"Ireland",
+	"Isle of Man",
+	"Israel",
+	"Italy",
+	"Jamaica",
+	"Japan",
+	"Jersey",
+	"Jordan",
+	"Kazakhstan",
+	"Kenya",
+	"Kiribati",
+	"Korea (the Democratic People's Republic of)",
+	"Korea (the Republic of)",
+	"Kuwait",
+	"Kyrgyzstan",
+	"Lao People's Democratic Republic (the)",
+	"Latvia",
+	"Lebanon",
+	"Lesotho",
+	"Liberia",
+	"Libya",
+	"Liechtenstein",
+	"Lithuania",
+	"Luxembourg",
+	"Macao",
+	"Madagascar",
+	"Malawi",
+	"Malaysia",
+	"Maldives",
+	"Mali",
+	"Malta",
+	"Marshall Islands (the)",
+	"Martinique",
+	"Mauritania",
+	"Mauritius",
+	"Mayotte",
+	"Mexico",
+	"Micronesia (Federated States of)",
+	"Moldova (the Republic of)",
+	"Monaco",
+	"Mongolia",
+	"Montenegro",
+	"Montserrat",
+	"Morocco",
+	"Mozambique",
+	"Myanmar",
+	"Namibia",
+	"Nauru",
+	"Nepal",
+	"Netherlands (the)",
+	"New Caledonia",
+	"New Zealand",
+	"Nicaragua",
+	"Niger (the)",
+	"Nigeria",
+	"Niue",
+	"Norfolk Island",
+	"Northern Mariana Islands (the)",
+	"Norway",
+	"Oman",
+	"Pakistan",
+	"Palau",
+	"Palestine, State of",
+	"Panama",
+	"Papua New Guinea",
+	"Paraguay",
+	"Peru",
+	"Philippines (the)",
+	"Pitcairn",
+	"Poland",
+	"Portugal",
+	"Puerto Rico",
+	"Qatar",
+	"Republic of North Macedonia",
+	"Romania",
+	"Russian Federation (the)",
+	"Rwanda",
+	"Réunion",
+	"Saint Barthélemy",
+	"Saint Helena, Ascension and Tristan da Cunha",
+	"Saint Kitts and Nevis",
+	"Saint Lucia",
+	"Saint Martin (French part)",
+	"Saint Pierre and Miquelon",
+	"Saint Vincent and the Grenadines",
+	"Samoa",
+	"San Marino",
+	"Sao Tome and Principe",
+	"Saudi Arabia",
+	"Senegal",
+	"Serbia",
+	"Seychelles",
+	"Sierra Leone",
+	"Singapore",
+	"Sint Maarten (Dutch part)",
+	"Slovakia",
+	"Slovenia",
+	"Solomon Islands",
+	"Somalia",
+	"South Africa",
+	"South Georgia and the South Sandwich Islands",
+	"South Sudan",
+	"Spain",
+	"Sri Lanka",
+	"Sudan (the)",
+	"Suriname",
+	"Svalbard and Jan Mayen",
+	"Sweden",
+	"Switzerland",
+	"Syrian Arab Republic",
+	"Taiwan",
+	"Tajikistan",
+	"Tanzania, United Republic of",
+	"Thailand",
+	"Timor-Leste",
+	"Togo",
+	"Tokelau",
+	"Tonga",
+	"Trinidad and Tobago",
+	"Tunisia",
+	"Turkey",
+	"Turkmenistan",
+	"Turks and Caicos Islands (the)",
+	"Tuvalu",
+	"Uganda",
+	"Ukraine",
+	"United Arab Emirates (the)",
+	"United Kingdom of Great Britain and Northern Ireland (the)",
+	"United States Minor Outlying Islands (the)",
+	"United States of America (the)",
+	"Uruguay",
+	"Uzbekistan",
+	"Vanuatu",
+	"Venezuela (Bolivarian Republic of)",
+	"Viet Nam",
+	"Virgin Islands (British)",
+	"Virgin Islands (U.S.)",
+	"Wallis and Futuna",
+	"Western Sahara",
+	"Yemen",
+	"Zambia",
+	"Zimbabwe",
+	"Åland Islands"]
 const genderOptions = ["Male", "Female", "Other"];
-const maritalStatusOptions = ["Single", "Married", "Divorced", "Widowed", "Other"];
+const maritalStatusOptions = ["Single", "Married - Outside Samaj", "Married - Within Samaj", "Divorced - Outside Samaj", "Divorced - Within Samaj", "Widowed - Outside Samaj", "Widowed - Within Samaj", "Other"];
 const membershipTypeOptions = ["Lifetime", "Regular"];
 const yesNoOptions = ["Yes", "No"];
 const supportMethodsOptions = [
@@ -187,9 +436,12 @@ const supportMethodsOptions = [
 
 const isValidDate = (d: any): d is Date => d instanceof Date && !isNaN(d.getTime());
 
-// Custom date input component
+// Update the DateInput component with proper type handling
 const DateInput = ({ value, onChange, disabled }: { value: Date | undefined, onChange: (date: Date) => void, disabled?: boolean }) => {
-  const formatDateForInput = (date: Date) => {
+  const formatDateForInput = (date: Date | undefined) => {
+    if (!date || !(date instanceof Date) || isNaN(date.getTime())) {
+      return '';
+    }
     return format(date, 'yyyy-MM-dd');
   };
 
@@ -203,7 +455,7 @@ const DateInput = ({ value, onChange, disabled }: { value: Date | undefined, onC
   return (
     <Input
       type="date"
-      value={value ? formatDateForInput(value) : ''}
+      value={formatDateForInput(value)}
       onChange={handleChange}
       disabled={disabled}
       className="bg-background"
@@ -229,7 +481,7 @@ export default function ComprehensiveFormPage() {
       hofName: '',
       membershipNumber: '',
       membershipType: 'Lifetime',
-      hofDob: new Date(),
+      hofDob: undefined,
       hofGender: 'Male',
       hofEmail: '',
       hofMobile: '',
@@ -241,9 +493,9 @@ export default function ComprehensiveFormPage() {
       hofProfession: '',
       hofProfessionOrgName: '',
       hofProfessionOrgAddress: '',
-      hofMaritalStatus: 'Married',
+      hofMaritalStatus: 'Married - Within Samaj',
       spouseName: '',
-      spouseDob: new Date(),
+      spouseDob: undefined,
       spouseGender: 'Male',
       spouseProfession: '',
       spouseProfessionOrgName: '',
@@ -263,7 +515,7 @@ export default function ComprehensiveFormPage() {
       samajWillingToParticipateEvents: 'Yes',
       samajWadiConstructionThoughts: '',
       samajWillingToSupportEvents: 'Yes',
-      samajSupportMethods: [] as any[],
+      samajSupportMethods: [],
       samajOtherSupportMethod: ''
     }
   });
@@ -337,14 +589,14 @@ export default function ComprehensiveFormPage() {
     let fieldsToValidate = steps[currentStep].fields;
     
     // Conditional validation for Spouse step
-    if (currentStep === 2 && hofMaritalStatus !== "Married") {
+    if (currentStep === 2 && !(hofMaritalStatus?.includes("Married") || hofMaritalStatus?.includes("Divorced") || hofMaritalStatus?.includes("Widowed"))) {
       fieldsToValidate = fieldsToValidate.filter(f => !f.startsWith('spouse'));
     }
 
     // Conditional validation for Children steps
-    const showChildrenSteps = hofMaritalStatus === "Married" ||
-      hofMaritalStatus === "Divorced" ||
-      hofMaritalStatus === "Widowed";
+    const showChildrenSteps = hofMaritalStatus?.includes("Married") || 
+      hofMaritalStatus?.includes("Divorced") || 
+      hofMaritalStatus?.includes("Widowed");
 
     if ((currentStep === 3 || currentStep === 4) && !showChildrenSteps) {
       fieldsToValidate = []; // Skip validation if not applicable
@@ -540,7 +792,9 @@ export default function ComprehensiveFormPage() {
           </div>
         );
       case 2: // Spouse Details
-        if (hofMaritalStatus !== "Married") return <p className="text-muted-foreground p-4 text-center">Spouse details are only applicable if marital status is 'Married'. Click Next.</p>;
+        if (!(hofMaritalStatus?.includes("Married") || hofMaritalStatus?.includes("Divorced") || hofMaritalStatus?.includes("Widowed"))) {
+          return <p className="text-muted-foreground p-4 text-center">Spouse details are only applicable if marital status is Married, Divorced, or Widowed. Click Next.</p>;
+        }
         return (
           <div className="space-y-6">
             <FormField control={control} name="spouseName" render={({ field }) => ( <FormItem> <FormLabel>Spouse's Full Name*</FormLabel> <FormControl><Input placeholder="Spouse's Full Name" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
@@ -587,7 +841,9 @@ export default function ComprehensiveFormPage() {
           </div>
         );
       case 3: // Children Under 18
-        if (!(hofMaritalStatus === "Married" || hofMaritalStatus === "Divorced" || hofMaritalStatus === "Widowed")) return <p className="text-muted-foreground p-4 text-center">Children details applicable if marital status is Married, Divorced, or Widowed. Click Next.</p>;
+        if (!(hofMaritalStatus?.includes("Married") || hofMaritalStatus?.includes("Divorced") || hofMaritalStatus?.includes("Widowed"))) {
+          return <p className="text-muted-foreground p-4 text-center">Children details applicable if marital status is Married, Divorced, or Widowed. Click Next.</p>;
+        }
         return (
           <div className="space-y-6">
             {childrenUnder18Fields.map((item, index) => (
@@ -637,12 +893,14 @@ export default function ComprehensiveFormPage() {
                 <FormField control={control} name={`childrenUnder18.${index}.appInstalled`} render={({ field }) => (<FormItem className="space-y-3"> <FormLabel>App Installed?</FormLabel><FormControl><RadioGroup onValueChange={field.onChange} value={field.value} className="flex space-x-2">{yesNoOptions.map(o => (<FormItem key={o} className="flex items-center space-x-3 space-y-0"><FormControl><RadioGroupItem value={o} /></FormControl><FormLabel className="font-normal">{o}</FormLabel></FormItem>))}</RadioGroup></FormControl><FormMessage /></FormItem>)} />
               </Card>
             ))}
-            <Button type="button" variant="outline" onClick={() => appendChildUnder18({ name: '', dob: new Date(), gender: 'Male', school: '', grade: '', mobile: '', appInstalled: undefined })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Under 18)</Button>
+            <Button type="button" variant="outline" onClick={() => appendChildUnder18({ name: '', dob: undefined, gender: 'Male', school: '', grade: '', mobile: '', appInstalled: undefined })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Under 18)</Button>
             {childrenUnder18Fields.length === 0 && <p className="text-muted-foreground text-center p-4">No children under 18 added yet.</p>}
           </div>
         );
       case 4: // Children Over 18
-         if (!(hofMaritalStatus === "Married" || hofMaritalStatus === "Divorced" || hofMaritalStatus === "Widowed")) return <p className="text-muted-foreground p-4 text-center">Children details applicable if marital status is Married, Divorced, or Widowed. Click Next.</p>;
+        if (!(hofMaritalStatus?.includes("Married") || hofMaritalStatus?.includes("Divorced") || hofMaritalStatus?.includes("Widowed"))) {
+          return <p className="text-muted-foreground p-4 text-center">Children details applicable if marital status is Married, Divorced, or Widowed. Click Next.</p>;
+        }
         return (
           <div className="space-y-6">
             {childrenOver18Fields.map((item, index) => (
@@ -713,7 +971,7 @@ export default function ComprehensiveFormPage() {
                 <FormField control={control} name={`childrenOver18.${index}.email`} render={({ field }) => ( <FormItem> <FormLabel>Email</FormLabel> <FormControl><Input type="email" placeholder="Email Address" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
               </Card>
             ))}
-            <Button type="button" variant="outline" onClick={() => appendChildOver18({ name: '', dob: new Date(), gender: 'Male', profession: '', professionOrgName: '', professionOrgAddress: '', maritalStatus: undefined, mobile: '', email: '' })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Over 18)</Button>
+            <Button type="button" variant="outline" onClick={() => appendChildOver18({ name: '', dob: undefined, gender: 'Male', profession: '', professionOrgName: '', professionOrgAddress: '', maritalStatus: undefined, mobile: '', email: '' })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Over 18)</Button>
             {childrenOver18Fields.length === 0 && <p className="text-muted-foreground text-center p-4">No children over 18 added yet.</p>}
           </div>
         );
@@ -838,7 +1096,7 @@ export default function ComprehensiveFormPage() {
                 <div><strong>Org Address:</strong> {formData.hofProfessionOrgAddress || 'N/A'}</div>
                 <div><strong>Marital Status:</strong> {formData.hofMaritalStatus}</div>
 
-                {formData.hofMaritalStatus === "Married" && formData.spouseName && (
+                {formData.hofMaritalStatus && (formData.hofMaritalStatus.includes("Married") || formData.hofMaritalStatus.includes("Divorced") || formData.hofMaritalStatus.includes("Widowed")) && formData.spouseName && (
                   <>
                     <div className="font-medium text-primary pt-3 mt-3 border-t">Spouse Details</div>
                     <div><strong>Name:</strong> {formData.spouseName}</div>
@@ -850,7 +1108,7 @@ export default function ComprehensiveFormPage() {
                   </>
                 )}
 
-                {(formData.hofMaritalStatus === "Married" || formData.hofMaritalStatus === "Divorced" || formData.hofMaritalStatus === "Widowed") && formData.childrenUnder18 && formData.childrenUnder18.length > 0 && (
+                {(formData.hofMaritalStatus && (formData.hofMaritalStatus.includes("Married") || formData.hofMaritalStatus.includes("Divorced") || formData.hofMaritalStatus.includes("Widowed"))) && formData.childrenUnder18 && formData.childrenUnder18.length > 0 && (
                   <>
                     <div className="font-medium text-primary pt-3 mt-3 border-t">Children (Under 18)</div>
                     {formData.childrenUnder18.map((child, idx) => (
@@ -860,11 +1118,12 @@ export default function ComprehensiveFormPage() {
                     ))}
                   </>
                 )}
-                 {(formData.hofMaritalStatus === "Married" || formData.hofMaritalStatus === "Divorced" || formData.hofMaritalStatus === "Widowed") && formData.childrenOver18 && formData.childrenOver18.length > 0 && (
+                
+                {(formData.hofMaritalStatus && (formData.hofMaritalStatus.includes("Married") || formData.hofMaritalStatus.includes("Divorced") || formData.hofMaritalStatus.includes("Widowed"))) && formData.childrenOver18 && formData.childrenOver18.length > 0 && (
                   <>
                     <div className="font-medium text-primary pt-3 mt-3 border-t">Children (Over 18)</div>
                     {formData.childrenOver18.map((child, idx) => (
-                       <div key={idx} className="pl-4 border-l-2 border-muted my-2 py-1">
+                      <div key={idx} className="pl-4 border-l-2 border-muted my-2 py-1">
                         <strong>{child.name}</strong> - DOB: {formatDateForReview(child.dob)}, Gender: {child.gender}, Prof: {child.profession || 'N/A'}, Org: {child.professionOrgName || 'N/A'}, Marital: {child.maritalStatus || 'N/A'}
                       </div>
                     ))}

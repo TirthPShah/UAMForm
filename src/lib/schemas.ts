@@ -17,7 +17,7 @@ export interface ChildOver18 {
   profession?: string;
   professionOrgName?: string;
   professionOrgAddress?: string;
-  maritalStatus?: 'Single' | 'Married' | 'Divorced' | 'Widowed' | 'Other';
+  maritalStatus?: 'Single' | 'Divorced' | 'Widowed' | 'Other' | 'Married - Outside Samaj' | 'Divorced - Outside Samaj' | 'Widowed - Outside Samaj' | 'Married - Within Samaj' | 'Divorced - Within Samaj' | 'Widowed - Within Samaj';
   mobile?: string;
   email?: string;
 }
@@ -38,7 +38,7 @@ export interface MembershipFormData {
   hofProfession?: string;
   hofProfessionOrgName?: string;
   hofProfessionOrgAddress?: string;
-  hofMaritalStatus?: 'Single' | 'Married' | 'Divorced' | 'Widowed' | 'Other';
+  hofMaritalStatus?: 'Single' | 'Married - Outside Samaj' | 'Married - Within Samaj' | 'Divorced - Outside Samaj' | 'Divorced - Within Samaj' | 'Widowed - Outside Samaj' | 'Widowed - Within Samaj' | 'Other';
   spouseName?: string;
   spouseDob?: Date;
   spouseGender?: 'Male' | 'Female' | 'Other';
