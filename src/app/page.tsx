@@ -73,6 +73,7 @@ const steps = [
       'membershipType',
       'hofDob',
       'hofGender',
+      'hofMaritalStatus',
       'hofEmail',
       'hofMobile',
       'hofAddressStreet',
@@ -87,10 +88,10 @@ const steps = [
     title: 'Professional Info',
     icon: Briefcase,
     fields: [
+      'hofDesignation',
       'hofProfession',
       'hofProfessionOrgName',
-      'hofProfessionOrgAddress',
-      'hofMaritalStatus'
+      'hofProfessionOrgAddress'
     ]
   },
   {
@@ -101,6 +102,7 @@ const steps = [
       'spouseName',
       'spouseDob',
       'spouseGender',
+      'spouseDesignation',
       'spouseProfession',
       'spouseProfessionOrgName',
       'spouseProfessionOrgAddress'
@@ -483,6 +485,7 @@ export default function ComprehensiveFormPage() {
       membershipType: 'Lifetime',
       hofDob: undefined,
       hofGender: 'Male',
+      hofMaritalStatus: 'Married - Within Samaj',
       hofEmail: '',
       hofMobile: '',
       hofAddressStreet: '',
@@ -490,13 +493,14 @@ export default function ComprehensiveFormPage() {
       hofAddressState: '',
       hofAddressPostalCode: '',
       hofAddressCountry: 'India',
+      hofDesignation: '',
       hofProfession: '',
       hofProfessionOrgName: '',
       hofProfessionOrgAddress: '',
-      hofMaritalStatus: 'Married - Within Samaj',
       spouseName: '',
       spouseDob: undefined,
       spouseGender: 'Male',
+      spouseDesignation: '',
       spouseProfession: '',
       spouseProfessionOrgName: '',
       spouseProfessionOrgAddress: '',
@@ -731,6 +735,26 @@ export default function ComprehensiveFormPage() {
                   <FormMessage />
                 </FormItem>
               )} />
+              <FormField control={control} name="hofMaritalStatus" render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Marital Status*</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value || ""}>
+                    <FormControl>
+                      <SelectTrigger className="bg-background">
+                        <SelectValue placeholder="Select marital status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-background">
+                      {maritalStatusOptions.map(s => (
+                        <SelectItem key={s} value={s} className="bg-background hover:bg-muted">
+                          {s}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )} />
               <FormField control={control} name="hofEmail" render={({ field }) => ( <FormItem> <FormLabel>Email*</FormLabel> <FormControl><Input type="email" placeholder="email@example.com" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
               <FormField control={control} name="hofMobile" render={({ field }) => ( <FormItem> <FormLabel>Mobile Number*</FormLabel> <FormControl><Input type="tel" placeholder="9876543210" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             </div>
@@ -766,29 +790,10 @@ export default function ComprehensiveFormPage() {
       case 1: // Professional Info
         return (
           <div className="space-y-6">
+            <FormField control={control} name="hofDesignation" render={({ field }) => ( <FormItem> <FormLabel>Designation*</FormLabel> <FormControl><Input placeholder="Your designation/title" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             <FormField control={control} name="hofProfession" render={({ field }) => ( <FormItem> <FormLabel>Profession / Occupation*</FormLabel> <FormControl><Input placeholder="Profession" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             <FormField control={control} name="hofProfessionOrgName" render={({ field }) => ( <FormItem> <FormLabel>Organisation Name</FormLabel> <FormControl><Input placeholder="Organisation Name" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             <FormField control={control} name="hofProfessionOrgAddress" render={({ field }) => ( <FormItem> <FormLabel>Profession Address</FormLabel> <FormControl><Textarea placeholder="Full address of workplace" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
-            <FormField control={control} name="hofMaritalStatus" render={({ field }) => (
-              <FormItem>
-                <FormLabel>Marital Status*</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value || ""}>
-                  <FormControl>
-                    <SelectTrigger className="bg-background">
-                      <SelectValue placeholder="Select marital status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className="bg-background">
-                    {maritalStatusOptions.map(s => (
-                      <SelectItem key={s} value={s} className="bg-background hover:bg-muted">
-                        {s}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )} />
           </div>
         );
       case 2: // Spouse Details
@@ -835,6 +840,7 @@ export default function ComprehensiveFormPage() {
                 <FormMessage />
               </FormItem>
             )} />
+            <FormField control={control} name="spouseDesignation" render={({ field }) => ( <FormItem> <FormLabel>Spouse's Designation*</FormLabel> <FormControl><Input placeholder="Spouse's designation/title" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             <FormField control={control} name="spouseProfession" render={({ field }) => ( <FormItem> <FormLabel>Spouse's Profession / Occupation*</FormLabel> <FormControl><Input placeholder="Profession" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             <FormField control={control} name="spouseProfessionOrgName" render={({ field }) => ( <FormItem> <FormLabel>Spouse's Organisation Name</FormLabel> <FormControl><Input placeholder="Organisation Name" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
             <FormField control={control} name="spouseProfessionOrgAddress" render={({ field }) => ( <FormItem> <FormLabel>Spouse's Profession Address</FormLabel> <FormControl><Textarea placeholder="Full address of workplace" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
@@ -944,7 +950,8 @@ export default function ComprehensiveFormPage() {
                     <FormMessage />
                   </FormItem>
                 )} />
-                <FormField control={control} name={`childrenOver18.${index}.profession`} render={({ field }) => ( <FormItem> <FormLabel>Profession (e.g., Student, Engineer)</FormLabel> <FormControl><Input placeholder="Profession" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
+                <FormField control={control} name={`childrenOver18.${index}.designation`} render={({ field }) => ( <FormItem> <FormLabel>Designation*</FormLabel> <FormControl><Input placeholder="Designation/title" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
+                <FormField control={control} name={`childrenOver18.${index}.profession`} render={({ field }) => ( <FormItem> <FormLabel>Profession (e.g., Education, Engineering)</FormLabel> <FormControl><Input placeholder="Profession" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
                 <FormField control={control} name={`childrenOver18.${index}.professionOrgName`} render={({ field }) => ( <FormItem> <FormLabel>Organisation/Institution Name</FormLabel> <FormControl><Input placeholder="Organisation Name" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
                 <FormField control={control} name={`childrenOver18.${index}.professionOrgAddress`} render={({ field }) => ( <FormItem> <FormLabel>Profession Address</FormLabel> <FormControl><Textarea placeholder="Address of workplace/institution" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
                 <FormField control={control} name={`childrenOver18.${index}.maritalStatus`} render={({ field }) => (
@@ -971,7 +978,18 @@ export default function ComprehensiveFormPage() {
                 <FormField control={control} name={`childrenOver18.${index}.email`} render={({ field }) => ( <FormItem> <FormLabel>Email</FormLabel> <FormControl><Input type="email" placeholder="Email Address" {...field} /></FormControl> <FormMessage /> </FormItem>)} />
               </Card>
             ))}
-            <Button type="button" variant="outline" onClick={() => appendChildOver18({ name: '', dob: undefined, gender: 'Male', profession: '', professionOrgName: '', professionOrgAddress: '', maritalStatus: undefined, mobile: '', email: '' })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Over 18)</Button>
+            <Button type="button" variant="outline" onClick={() => appendChildOver18({ 
+              name: '', 
+              dob: undefined, 
+              gender: 'Male', 
+              designation: '', 
+              profession: '', 
+              professionOrgName: '', 
+              professionOrgAddress: '', 
+              maritalStatus: undefined, 
+              mobile: '', 
+              email: '' 
+            })}><PlusCircle className="h-4 w-4 mr-2" /> Add Child (Over 18)</Button>
             {childrenOver18Fields.length === 0 && <p className="text-muted-foreground text-center p-4">No children over 18 added yet.</p>}
           </div>
         );

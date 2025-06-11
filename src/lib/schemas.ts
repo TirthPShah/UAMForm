@@ -14,6 +14,7 @@ export interface ChildOver18 {
   name?: string;
   dob?: Date;
   gender?: 'Male' | 'Female' | 'Other';
+  designation?: string;
   profession?: string;
   professionOrgName?: string;
   professionOrgAddress?: string;
@@ -35,6 +36,7 @@ export interface MembershipFormData {
   hofAddressState?: string;
   hofAddressPostalCode?: string;
   hofAddressCountry?: string;
+  hofDesignation?: string;
   hofProfession?: string;
   hofProfessionOrgName?: string;
   hofProfessionOrgAddress?: string;
@@ -42,6 +44,7 @@ export interface MembershipFormData {
   spouseName?: string;
   spouseDob?: Date;
   spouseGender?: 'Male' | 'Female' | 'Other';
+  spouseDesignation?: string;
   spouseProfession?: string;
   spouseProfessionOrgName?: string;
   spouseProfessionOrgAddress?: string;
