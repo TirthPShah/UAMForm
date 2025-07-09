@@ -1,103 +1,267 @@
-import Image from "next/image";
+// app/test/page.tsx
+'use client'
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { headOfFamilyPersonalInfoSchema } from "@/schemas/HeadOfFamilyPersonalInfo";
+import { spouseSchema } from "@/schemas/Spouse";
+import { childUnder18Schema } from "@/schemas/ChildUnder18";
+import { childrenAbove18Schema } from "@/schemas/ChildrenAbove18";
+import { ujaniSchema } from "@/schemas/Ujani";
+import { ujaniFutureIdeasSchema } from "@/schemas/UjaniFutureIdeas";
+import { supportSchema } from "@/schemas/Support";
+import { extrasSchema } from "@/schemas/Extras";
+import { surveyedBySchema } from "@/schemas/SurveyedBy";
+import DynamicFormSection from "@/components/DynamicFormSection";
+import ChildFormSection from "@/components/ChildFormSection";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+const SECTION_ORDER = [
+  "hof", "spouse", "childrenU18", "childrenAbove18", "ujani", "ujaniFuture", "support", "extras", "surveyedBy"
+];
+
+export default function MultiSectionFormPage() {
+  const [sectionIdx, setSectionIdx] = useState(0);
+  const [formData, setFormData] = useState<any>({
+    hof: {},
+    spouse: {},
+    childrenU18: [],
+    childrenAbove18: [],
+    ujani: {},
+    ujaniFuture: {},
+    support: {},
+    extras: {},
+    surveyedBy: {},
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  // Section helpers
+  const currentSection = SECTION_ORDER[sectionIdx];
+
+  // Conditional logic
+  const showSpouse = formData.hof?.hofMaritalStatus && formData.hof.hofMaritalStatus !== "Single";
+
+  // Navigation
+  const goNext = () => {
+    let next = sectionIdx + 1;
+    // Skip Spouse if not required
+    if (SECTION_ORDER[next] === "spouse" && !showSpouse) next++;
+    setSectionIdx(next);
+  };
+  const goPrev = () => {
+    let prev = sectionIdx - 1;
+    // Skip Spouse if not required
+    if (SECTION_ORDER[sectionIdx] === "spouse" && !showSpouse) prev--;
+    setSectionIdx(prev);
+  };
+
+  // Download as JSON
+  const handleDownloadJson = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(formData, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "survey_data.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  };
+
+  // Section renders
+  if (submitted) {
+    return (
+      <div className="max-w-3xl mx-auto py-10">
+        <h2 className="text-2xl font-bold mb-4 text-center">Survey Complete</h2>
+        <pre className="bg-gray-100 p-4 rounded text-sm overflow-x-auto w-full max-w-3xl">
+          {JSON.stringify(formData, null, 2)}
+        </pre>
+        <Button className="mt-4" type="button" onClick={handleDownloadJson}>Download JSON</Button>
+      </div>
+    );
+  }
+
+  // Section logic
+  switch (currentSection) {
+    case "hof":
+      return (
+        <DynamicFormSection
+          schema={headOfFamilyPersonalInfoSchema}
+          formData={formData.hof}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, hof: data }))}
+          sectionTitle="Head of Family"
+        >
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    case "spouse":
+      if (!showSpouse) { goNext(); return null; }
+      return (
+        <DynamicFormSection
+          schema={spouseSchema}
+          formData={formData.spouse}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, spouse: data }))}
+          sectionTitle="Spouse"
+          visibleFields={values => {
+            // Only show fields that pass their .visible() condition if present
+            return spouseSchema
+              .filter(field => !field.visible || field.visible(values))
+              .map(field => field.name);
+          }}
+        >
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goPrev}>Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    case "childrenU18":
+      // Only show if marital status is NOT Single
+      if (!showSpouse) { goNext(); return null; }
+      return (
+        <div className="max-w-3xl mx-auto py-10">
+          <h2 className="text-xl font-bold mb-4 text-center">Children Under 18</h2>
+          {formData.childrenU18.map((child: any, idx: number) => (
+            <ChildFormSection
+              key={idx}
+              formData={child}
+              setFormData={data => setFormData((prev: any) => {
+                const arr = [...prev.childrenU18];
+                arr[idx] = { ...arr[idx], ...data };
+                return { ...prev, childrenU18: arr };
+              })}
+              schema={childUnder18Schema}
+              visibleFields={values => {
+                // Only show fields if their conditions are met
+                const base = [
+                  'childu18Name',
+                  'childu18Dob',
+                  'childu18Gender',
+                  'childu18PlaceOfStudy',
+                  'childu18MobileNumber',
+                  'childu18Hobbies',
+                  'childu18Interests',
+                ];
+                if (values.childu18PlaceOfStudy === 'School') {
+                  return [...base, 'childu18SchoolClass'];
+                } else if (values.childu18PlaceOfStudy === 'Diploma') {
+                  return [...base, 'childu18DiplomaYear', 'childu18DiplomaSpec'];
+                }
+                return base;
+              }}
+              subtitle={`Child ${idx + 1}`}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          ))}
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={() => setFormData((prev: any) => ({ ...prev, childrenU18: [...prev.childrenU18, {}] }))} variant="outline">Add Child</Button>
+            <Button type="button" onClick={() => setSectionIdx(SECTION_ORDER.indexOf('spouse'))} variant="secondary">Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      );
+    case "childrenAbove18":
+      // Only show if marital status is NOT Single
+      if (!showSpouse) { goNext(); return null; }
+      return (
+        <div className="max-w-3xl mx-auto py-10">
+          <h2 className="text-xl font-bold mb-4 text-center">Children Above 18</h2>
+          {formData.childrenAbove18.map((child: any, idx: number) => (
+            <DynamicFormSection
+              key={idx}
+              schema={childrenAbove18Schema}
+              formData={child}
+              setFormData={data => setFormData((prev: any) => {
+                const arr = [...prev.childrenAbove18];
+                arr[idx] = { ...arr[idx], ...data };
+                return { ...prev, childrenAbove18: arr };
+              })}
+              sectionTitle={`Child Above 18 - ${idx + 1}`}
+              visibleFields={values => {
+                // Only show fields that pass their .visible() condition if present
+                return childrenAbove18Schema
+                  .filter(field => !field.visible || field.visible(values))
+                  .map(field => field.name);
+              }}
+            />
+          ))}
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={() => setFormData((prev: any) => ({ ...prev, childrenAbove18: [...prev.childrenAbove18, {}] }))} variant="outline">Add Child</Button>
+            <Button type="button" onClick={() => setSectionIdx(SECTION_ORDER.indexOf('childrenU18'))} variant="secondary">Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </div>
+      );
+    case "ujani":
+      return (
+        <DynamicFormSection
+          schema={ujaniSchema}
+          formData={formData.ujani}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, ujani: data }))}
+          sectionTitle="Ujani"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goPrev}>Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    case "ujaniFuture":
+      return (
+        <DynamicFormSection
+          schema={ujaniFutureIdeasSchema}
+          formData={formData.ujaniFuture}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, ujaniFuture: data }))}
+          sectionTitle="Ujani - Future Ideas"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goPrev}>Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    case "support":
+      return (
+        <DynamicFormSection
+          schema={supportSchema}
+          formData={formData.support}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, support: data }))}
+          sectionTitle="Support"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goPrev}>Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    case "extras":
+      return (
+        <DynamicFormSection
+          schema={extrasSchema}
+          formData={formData.extras}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, extras: data }))}
+          sectionTitle="Extras"
+        >
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goPrev}>Back</Button>
+            <Button type="button" onClick={goNext}>Next</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    case "surveyedBy":
+      return (
+        <DynamicFormSection
+          schema={surveyedBySchema}
+          formData={formData.surveyedBy}
+          setFormData={data => setFormData((prev: any) => ({ ...prev, surveyedBy: data }))}
+          sectionTitle="Surveyed By"
+        >
+          <div className="flex gap-2 mt-4 justify-center">
+            <Button type="button" onClick={goPrev}>Back</Button>
+            <Button type="button" onClick={() => setSubmitted(true)}>Submit</Button>
+          </div>
+        </DynamicFormSection>
+      );
+    default:
+      return null;
+  }
 }
+

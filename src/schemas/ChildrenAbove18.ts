@@ -1,0 +1,57 @@
+import { FieldSchema } from "./type";
+
+export const childrenAbove18Schema: FieldSchema[] = [
+  { name: "childAbove18Name", label: "Name", type: "text", required: true },
+  { name: "childAbove18Dob", label: "Date of Birth", type: "date", required: true },
+  { name: "childAbove18Gender", label: "Gender", type: "select", options: ["Male", "Female"], required: true },
+  { name: "childAbove18MobileNumber", label: "Mobile Number", type: "text" },
+  { name: "childAbove18BloodGroup", label: "Blood Group", type: "select", options: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Others"] },
+  { name: "childAbove18IsBloodDonor", label: "Is Blood Donor", type: "select", options: ["Yes", "No"] },
+  { name: "childAbove18Address", label: "Address", type: "text", placeholder: "City, State, Country" },
+  { name: "childAbove18Profession", label: "Profession", type: "select", options: ["Student", "Employee", "Self Employed", "Retired", "Other"], required: true },
+  // Student fields
+  { name: "childAbove18StudentStudyLevel", label: "Study Level", type: "select", options: ["School", "Diploma", "Bachelor", "Master", "Doctorate"], visible: (data: any) => data.childAbove18Profession === "Student" },
+  { name: "childAbove18StudentSchoolStandard", label: "School Standard", type: "select", options: ["9", "10", "11", "12"], visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "School" },
+  { name: "childAbove18StudentDiplomaYear", label: "Year of Diploma", type: "select", options: ["1", "2", "3", "4"], visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Diploma" },
+  { name: "childAbove18StudentBachelorDegree", label: "Degree", type: "datalist", options: ["B.A.", "B.Sc.", "B.Com.", "B.B.A.", "B.Tech.", "B.E.", "B.M.S.", "B.S.", "B.L.", "B.Ed.", "B.Pharm.", "B.Arch.", "B.F.A.", "B.M.", "B.D.", "B.Drama.", "Others"], visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Bachelor" },
+  { name: "childAbove18StudentMasterDegree", label: "Degree", type: "datalist", options: ["M.A.", "M.Sc.", "M.Com.", "M.B.A.", "M.Tech.", "M.E.", "M.M.S.", "M.S.", "M.L.", "M.Ed.", "M.Pharm.", "M.Arch.", "M.F.A.", "M.M.", "M.D.", "M.Drama.", "Others"], visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Master" },
+  { name: "childAbove18StudentDoctorateDegree", label: "Degree", type: "datalist", options: ["Ph.D.", "Others"], visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Doctorate" },
+  { name: "childAbove18StudentBachelorSpecialization", label: "Specialization", type: "text", visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Bachelor" },
+  { name: "childAbove18StudentMasterSpecialization", label: "Specialization", type: "text", visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Master" },
+  { name: "childAbove18StudentDoctorateSpecialization", label: "Specialization", type: "text", visible: (data: any) => data.childAbove18Profession === "Student" && data.childAbove18StudentStudyLevel === "Doctorate" },
+  // Employee fields
+  { name: "childAbove18EmployeeHighestEducation", label: "Highest Education", type: "text", visible: (data: any) => data.childAbove18Profession === "Employee" },
+  { name: "childAbove18EmployeeDesignation", label: "Designation", type: "datalist", options: ["Software Engineer", "C.A.", "Doctor", "Lawyer", "Accountant", "Teacher", "Other"], visible: (data: any) => data.childAbove18Profession === "Employee" },
+  { name: "childAbove18EmployeeOrganizationName", label: "Organization Name", type: "text", visible: (data: any) => data.childAbove18Profession === "Employee" },
+  { name: "childAbove18EmployeeOrganizationAddress", label: "Organization Address", type: "text", placeholder: "City, State, Country", visible: (data: any) => data.childAbove18Profession === "Employee" },
+  // Self Employed fields
+  { name: "childAbove18SelfEmployedHighestEducation", label: "Highest Education", type: "text", visible: (data: any) => data.childAbove18Profession === "Self Employed" },
+  { name: "childAbove18SelfEmployedProfession", label: "Profession", type: "datalist", options: ["Software Engineer", "C.A.", "Doctor", "Lawyer", "Accountant", "Teacher", "Other"], visible: (data: any) => data.childAbove18Profession === "Self Employed" },
+  { name: "childAbove18SelfEmployedOrganizationName", label: "Organization Name", type: "text", visible: (data: any) => data.childAbove18Profession === "Self Employed" },
+  { name: "childAbove18SelfEmployedOrganizationAddress", label: "Organization Address", type: "text", placeholder: "City, State, Country", visible: (data: any) => data.childAbove18Profession === "Self Employed" },
+  { name: "childAbove18SelfEmployeedBusinessCard", label: "Business Card", type: "file", multiple: true, visible: (data: any) => data.childAbove18Profession === "Self Employed" },
+  // Retired fields
+  { name: "childAbove18RetiredEducation", label: "Education", type: "text", visible: (data: any) => data.childAbove18Profession === "Retired" },
+  { name: "childAbove18RetiredOrganizationName", label: "Previous Organization Name", type: "text", visible: (data: any) => data.childAbove18Profession === "Retired" },
+  { name: "childAbove18RetiredDesignation", label: "Previous Designation", type: "text", visible: (data: any) => data.childAbove18Profession === "Retired" },
+  { name: "childAbove18RetiredOrganizationAddress", label: "Previous Organization Address", type: "text", placeholder: "City, State, Country", visible: (data: any) => data.childAbove18Profession === "Retired" },
+  // Extra
+  { name: "childAbove18ExtraQualificationAndMastery", label: "Extra Qualification and Mastery", type: "textarea" },
+  { name: "childAbove18ExtraNotes", label: "Extra Notes", type: "textarea", placeholder: "If some other information is required, please mention it here" },
+  // Marital/Spouse
+  { name: "childAbove18MaritalStatus", label: "Marital Status", type: "select", options: ["Single", "Married - Within Samaj", "Married - Outside Samaj", "Widow - Within Samaj", "Widow - Outside Samaj", "Divorced - Within Samaj", "Divorced - Outside Samaj"] },
+  { name: "childAbove18SpouseName", label: "Spouse Name", type: "text", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseDob", label: "Spouse's Date of Birth", type: "date", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseGender", label: "Spouse's Gender", type: "select", options: ["Male", "Female"], visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseMobileNumber", label: "Spouse's Mobile Number", type: "phone", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseBloodGroup", label: "Spouse's Blood Group", type: "select", options: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Others"], visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseHighestEducation", label: "Spouse's Highest Education", type: "text", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseProfession", label: "Spouse's Profession", type: "select", options: ["Employee", "Self Employed", "Retired", "Other"], visible: (data: any) => data.childAbove18MaritalStatus !== "Single" },
+  { name: "childAbove18SpouseEmployeeDesignation", label: "Spouse's Designation", type: "text", placeholder: "Software Engineer, C.A., Doctor, Lawyer, Accountant, Teacher, Other", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Employee" },
+  { name: "childAbove18SpouseEmployeeOrganizationName", label: "Spouse's Organization Name", type: "text", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Employee" },
+  { name: "childAbove18SpouseEmployeeOrganizationAddress", label: "Spouse's Organization Address", type: "text", placeholder: "City, State, Country", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Employee" },
+  { name: "childAbove18SpouseSelfEmployedProfession", label: "Spouse's Profession", type: "select", options: ["Software Engineer", "C.A.", "Doctor", "Lawyer", "Accountant", "Teacher", "Other"], visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Self Employed" },
+  { name: "childAbove18SpouseSelfEmployedOrganizationName", label: "Spouse's Organization Name", type: "text", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Self Employed" },
+  { name: "childAbove18SpouseSelfEmployedOrganizationAddress", label: "Spouse's Organization Address", type: "text", placeholder: "City, State, Country", visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Self Employed" },
+  { name: "childAbove18SpouseSelfEmployedBusinessCard", label: "Spouse's Business Card", type: "file", multiple: true, visible: (data: any) => data.childAbove18MaritalStatus !== "Single" && data.childAbove18SpouseProfession === "Self Employed" },
+];
