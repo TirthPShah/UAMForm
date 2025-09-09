@@ -1,0 +1,64 @@
+import { BloodGroupType, CountryType, MaritalStatusType, MembershipType, ProfessionType } from "../options";
+
+export interface HoFData {
+
+    headOfFamilyName: string;
+    headOfFamilyMembershipNumber: string;
+    headOfFamilyMembershipType: MembershipType;
+    headOfFamilyDateOfBirth: string;
+    headOfFamilyGender: "Male" | "Female";
+    headOfFamilyEmail: string;
+    headOfFamilyMobile: string;
+    headOfFamilySecondaryMobile?: string;
+    headOfFamilyMaritalStatus: MaritalStatusType;
+    headOfFamilyAddress: string;
+    headOfFamilyCity: string;
+    headOfFamilyState: string;
+    headOfFamilyCountry: CountryType;
+    headOfFamilyLat: string;
+    headOfFamilyLon: string;
+    headOfFamilyEducation: string;
+    headOfFamilyProfession: ProfessionType;
+    headOfFamilyDesignation?: string;
+    headOfFamilyOrganisation?: string;
+    headOfFamilyBusinessAddress?: string;
+    headOfFamilyBusinessDocs?: FileList | null;
+    headOfFamilyPhoto: File | null;
+    headOfFamilyBloodGroup: BloodGroupType;
+    headOfFamilyBloodGroupOthers?: string;
+    headOfFamilyIsBloodDonor: "Yes" | "No";
+    headOfFamilyHobbies?: string;
+    headOfFamilyExtraNotes?: string;
+    headOfFamilyAge: number | null;
+
+}
+
+// 🔹 Centralized defaults
+export const defaultHoFData: HoFData = {
+
+  headOfFamilyName: "",
+  headOfFamilyMembershipNumber: "",
+  headOfFamilyMembershipType: "Regular",   // sensible default
+  headOfFamilyDateOfBirth: "",
+  headOfFamilyGender: "Male",
+  headOfFamilyEmail: "",
+  headOfFamilyMobile: "",
+  headOfFamilySecondaryMobile: "",
+  headOfFamilyMaritalStatus: "Married - Within Samaj",     // sensible default
+  headOfFamilyAddress: "",
+  headOfFamilyCity: "",
+  headOfFamilyState: "",
+  headOfFamilyCountry: "India",            // or null if strict
+  headOfFamilyLat: "",
+  headOfFamilyLon: "",
+  headOfFamilyEducation: "",
+  headOfFamilyProfession: "Employee",
+  headOfFamilyPhoto: null,
+  headOfFamilyBloodGroup: "O+",            // pick a common default
+  headOfFamilyBloodGroupOthers: "",
+  headOfFamilyIsBloodDonor: "No",
+  headOfFamilyHobbies: "",
+  headOfFamilyExtraNotes: "",
+  headOfFamilyAge: null,
+
+};
