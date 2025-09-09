@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { MaritalStatusType, ProfessionType } from "@/app/options";
+import { countries, CountryType, MaritalStatusType, ProfessionType } from "@/app/options";
 import { ChildAbove18DefaultData } from "@/app/types/childAbove18";
 
 interface ChildAbove18PageProps {
@@ -37,7 +37,7 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
 
                 return (
 
-                    <div key={field.id}>
+                    <div key={field.id} className="space-y-4">
 
                         <h3 className="font-medium">Child {index + 1}</h3>
 
@@ -66,21 +66,6 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
 
                             {errors.childrenAbove18?.[index]?.childAbove18DateOfBirth && (
                                 <p className="text-sm text-red-600">{errors.childrenAbove18[index]?.childAbove18DateOfBirth?.message}</p>
-                            )}
-
-                        </div>
-
-                        <div className="space-y-2">
-
-                            <Label htmlFor={`childrenAbove18.${index}.childAbove18Age`}>Age</Label>
-                            <Input 
-                                type="number"
-                                id={`childrenAbove18.${index}.childAbove18Age`} 
-                                {...register(`childrenAbove18.${index}.childAbove18Age`, { valueAsNumber: true })} 
-                            />
-                            
-                            {errors.childrenAbove18?.[index]?.childAbove18Age && (
-                                <p className="text-sm text-red-600">{errors.childrenAbove18[index]?.childAbove18Age?.message}</p>
                             )}
 
                         </div>
@@ -308,10 +293,23 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
                             <div className="space-y-2">
 
                                 <Label htmlFor={`childrenAbove18.${index}.childAbove18Country`}>Country</Label>
-                                <Input 
-                                    id={`childrenAbove18.${index}.childAbove18Country`} 
-                                    {...register(`childrenAbove18.${index}.childAbove18Country`)} 
-                                />
+                                <Select
+                                    onValueChange={(val) => {
+                                        setValue(`childrenAbove18.${index}.childAbove18Country`, val as CountryType);
+                                    }}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Country" />
+                                    </SelectTrigger>
+                                    
+                                    <SelectContent>
+                                        {countries.map((country) => (
+                                            <SelectItem key={country} value={country}>
+                                                {country}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
 
                                 {errors.childrenAbove18?.[index]?.childAbove18Country && (
                                     <p className="text-sm text-red-600">{errors.childrenAbove18[index]?.childAbove18Country?.message}</p>

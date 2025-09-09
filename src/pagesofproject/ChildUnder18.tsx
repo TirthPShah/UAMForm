@@ -39,7 +39,7 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
 
                 return (
 
-                    <div key={field.id}>
+                    <div key={field.id} className="space-y-4">
 
                         <h3 className="font-medium">Child {index + 1} </h3>
 
@@ -50,7 +50,7 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
                                 id={`childrenUnder18.${index}.childUnder18Name`}
                                 placeholder="Name"
                                 {...register(`childrenUnder18.${index}.childUnder18Name`)}
-                            />
+                                />
 
                             {errors.childrenUnder18?.[index]?.childUnder18Name && (
                                 <p className="text-red-500 text-sm">
@@ -67,7 +67,7 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
                                 type="date"
                                 id={`childrenUnder18.${index}.childUnder18DateOfBirth`}
                                 {...register(`childrenUnder18.${index}.childUnder18DateOfBirth`)}
-                            />
+                                />
 
                             {errors.childrenUnder18?.[index]?.childUnder18DateOfBirth && (
                                 <p className="text-red-500 text-sm">
@@ -107,12 +107,12 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
 
                         <div className="space-y-2">
 
-                            <Label htmlFor={`childrenUnder18.${index}.childUnder18PlaceOfStudy`}>PlaceOfStudy</Label>
+                            <Label htmlFor={`childrenUnder18.${index}.childUnder18PlaceOfStudy`}>Study Level</Label>
                             <Select
                                 onValueChange={(val) => {
                                     setValue(`childrenUnder18.${index}.childUnder18PlaceOfStudy`, val as "School" | "Diploma" | "Too Small To Study")
                                 }}
-                            >
+                                >
 
                                 <SelectTrigger>
                                     <SelectValue placeholder="Place of Study"></SelectValue>
@@ -134,25 +134,8 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
 
                         </div>
 
-                        <div className="space-y-2">
-
-                            <Label htmlFor={`childrenUnder18.${index}.childUnder18MobileNumber`}>Mobile Number</Label>
-                            <Input
-                                id={`childrenUnder18.${index}.childUnder18MobileNumber`}
-                                placeholder="Mobile Number (Optional)"
-                                {...register(`childrenUnder18.${index}.childUnder18MobileNumber`)}
-                            />
-
-                            {errors.childrenUnder18?.[index]?.childUnder18MobileNumber && (
-                                <p className="text-red-500 text-sm">
-                                    {errors.childrenUnder18[index]?.childUnder18MobileNumber?.message}
-                                </p>
-                            )}
-
-                        </div>
-
                         {placeOfStudy === "School" && (
-
+                            
                             <div className="space-y-2">
 
                                 <Label htmlFor={`childrenUnder18.${index}.childUnder18Grade`}>Grade</Label>
@@ -160,7 +143,7 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
                                     onValueChange={(val) => {
                                         setValue(`childrenUnder18.${index}.childUnder18Grade`, val as GradeType)
                                     }}
-                                >
+                                    >
 
                                     <SelectTrigger>
                                         <SelectValue placeholder="Grade"></SelectValue>
@@ -183,8 +166,40 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
                             </div>
                         )}
 
-                        {placeOfStudy === "Diploma" && (
+                        {placeOfStudy === "School" && (watch(`childrenUnder18.${index}.childUnder18Grade`) === "11" || watch(`childrenUnder18.${index}.childUnder18Grade`) === "12") && (
 
+                            <div className="space-y-2">
+
+                                <Label htmlFor={`childrenUnder18.${index}.childUnder18Stream`}>Stream</Label>
+                                <Select
+                                    onValueChange={(val) => {
+                                        setValue(`childrenUnder18.${index}.childUnder18Stream`, val as "Commerce" | "Science" | "Arts")
+                                    }}
+                                >
+
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select Stream" />
+                                    </SelectTrigger>
+
+                                    <SelectContent>
+                                        <SelectItem value="Commerce">Commerce</SelectItem>
+                                        <SelectItem value="Science">Science</SelectItem>
+                                        <SelectItem value="Arts">Arts</SelectItem>  
+                                    </SelectContent>
+
+                                </Select>
+
+                                {errors.childrenUnder18?.[index]?.childUnder18Stream && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.childrenUnder18[index]?.childUnder18Stream?.message}
+                                    </p>
+                                )}
+
+                            </div>
+                        )}
+
+                        {placeOfStudy === "Diploma" && (
+                            
                             <div className="space-y-2">
 
                                 <Label htmlFor={`childrenUnder18.${index}.childUnder18DiplomaSpecialization`}>Diploma Specialization</Label>
@@ -192,7 +207,7 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
                                     id={`childrenUnder18.${index}.childUnder18DiplomaSpecialization`}
                                     placeholder="IT, Mechanical Engineering, ..."
                                     {...register(`childrenUnder18.${index}.childUnder18DiplomaSpecialization`)}
-                                />
+                                    />
 
                                 {errors.childrenUnder18?.[index]?.childUnder18DiplomaSpecialization && (
                                     <p className="text-red-500 text-sm">
@@ -206,11 +221,28 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
 
                         <div className="space-y-2">
 
+                            <Label htmlFor={`childrenUnder18.${index}.childUnder18MobileNumber`}>Mobile Number</Label>
+                            <Input
+                                id={`childrenUnder18.${index}.childUnder18MobileNumber`}
+                                placeholder="Mobile Number (Optional)"
+                                {...register(`childrenUnder18.${index}.childUnder18MobileNumber`)}
+                            />
+
+                            {errors.childrenUnder18?.[index]?.childUnder18MobileNumber && (
+                                <p className="text-red-500 text-sm">
+                                    {errors.childrenUnder18[index]?.childUnder18MobileNumber?.message}
+                                </p>
+                            )}
+
+                        </div>
+
+                        <div className="space-y-2">
+
                             <Label htmlFor={`childrenUnder18.${index}.childUnder18Hobbies`}>Hobbies</Label>
                             <Input
                                 id={`childrenUnder18.${index}.childUnder18Hobbies`}
                                 {...register(`childrenUnder18.${index}.childUnder18Hobbies`)}
-                            />
+                                />
 
                             {errors.childrenUnder18?.[index]?.childUnder18Hobbies && (
                                 <p className="text-red-500 text-sm">
