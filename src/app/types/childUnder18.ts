@@ -7,6 +7,7 @@ export interface ChildUnder18Data {
     childUnder18Gender: "Male" | "Female";
     childUnder18PlaceOfStudy: "School" | "Diploma" | "Too Small To Study"
     childUnder18Grade?: GradeType;
+    childUnder18StudyInstituteName?: string;
     childUnder18Stream?: "Commerce" | "Science" | "Arts";
     childUnder18DiplomaSpecialization?: string;
     childUnder18MobileNumber: string;
@@ -21,6 +22,7 @@ export const defaultChildUnder18Data : ChildUnder18Data = {
     childUnder18Gender: "Male",
     childUnder18PlaceOfStudy: "School",
     childUnder18Grade: "1",
+    childUnder18StudyInstituteName: "",
     childUnder18Stream: "Science",
     childUnder18DiplomaSpecialization: "IT",
     childUnder18MobileNumber: "",

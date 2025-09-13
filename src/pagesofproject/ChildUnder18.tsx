@@ -134,32 +134,20 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
 
                         </div>
 
-                        {placeOfStudy === "School" && (
+                        {(placeOfStudy === "School" || placeOfStudy === "Diploma") && (
                             
                             <div className="space-y-2">
 
-                                <Label htmlFor={`childrenUnder18.${index}.childUnder18Grade`}>Grade</Label>
-                                <Select
-                                    onValueChange={(val) => {
-                                        setValue(`childrenUnder18.${index}.childUnder18Grade`, val as GradeType)
-                                    }}
-                                    >
+                                <Label htmlFor={`childrenUnder18.${index}.childUnder18StudyInstituteName`}>Institute Name</Label>
+                                <Input
+                                    id={`childrenUnder18.${index}.childUnder18StudyInstituteName`}
+                                    placeholder="School/College Name"
+                                    {...register(`childrenUnder18.${index}.childUnder18StudyInstituteName`)}
+                                />
 
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Grade"></SelectValue>
-                                    </SelectTrigger>
-
-                                    <SelectContent>
-                                        {grades.map((grade) => (
-                                            <SelectItem key={grade} value={grade}>{grade}</SelectItem>
-                                        ))}
-                                    </SelectContent>
-
-                                </Select>
-
-                                {errors.childrenUnder18?.[index]?.childUnder18Grade && (
+                                {errors.childrenUnder18?.[index]?.childUnder18StudyInstituteName && (
                                     <p className="text-red-500 text-sm">
-                                        {errors.childrenUnder18[index]?.childUnder18Grade?.message}
+                                        {errors.childrenUnder18[index]?.childUnder18StudyInstituteName?.message}
                                     </p>
                                 )}
 
@@ -196,6 +184,39 @@ export default function ChildUnder18 ({register, control, setValue, watch, error
                                 )}
 
                             </div>
+                        )}
+
+{placeOfStudy === "School" && (
+                            
+                            <div className="space-y-2">
+
+                                <Label htmlFor={`childrenUnder18.${index}.childUnder18Grade`}>Grade</Label>
+                                <Select
+                                    onValueChange={(val) => {
+                                        setValue(`childrenUnder18.${index}.childUnder18Grade`, val as GradeType)
+                                    }}
+                                    >
+
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Grade"></SelectValue>
+                                    </SelectTrigger>
+
+                                    <SelectContent>
+                                        {grades.map((grade) => (
+                                            <SelectItem key={grade} value={grade}>{grade}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+
+                                </Select>
+
+                                {errors.childrenUnder18?.[index]?.childUnder18Grade && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.childrenUnder18[index]?.childUnder18Grade?.message}
+                                    </p>
+                                )}
+
+                            </div>
+
                         )}
 
                         {placeOfStudy === "Diploma" && (

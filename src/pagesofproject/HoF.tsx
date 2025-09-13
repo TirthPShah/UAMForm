@@ -27,7 +27,7 @@ export default function HoFPageDetails ({register, errors, watch, onNext, setVal
         
         <div className="space-y-6">
 
-            <h2 className="text-xl font-semibold">Step 1 : Head Of Family Detials</h2>
+            <h2 className="text-xl font-semibold">Step 1 : Head Of Family Details</h2>
 
             {/* Name */}
 

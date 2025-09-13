@@ -87,15 +87,15 @@ export default function UjaniPage ({register, errors, watch, onBack, onNext, set
 
                 <div className="space-y-2">
 
-                    <Label htmlFor="ujaniFoodRating">Food Rating</Label>
+                    <Label htmlFor="ujaniManagementRating">Mangement Rating</Label>
                     <Select
                         onValueChange={(val) => {
-                            setValue("ujaniFoodRating", val as RatingType);
+                            setValue("ujaniManagementRating", val as RatingType);
                         }}
                     >
 
                         <SelectTrigger>
-                            <SelectValue placeholder="Food Rating"></SelectValue>
+                            <SelectValue placeholder="Management Rating"></SelectValue>
                         </SelectTrigger>
 
                         <SelectContent>
@@ -106,9 +106,9 @@ export default function UjaniPage ({register, errors, watch, onBack, onNext, set
 
                     </Select>
 
-                    {errors.ujaniFoodRating && (
+                    {errors.ujaniManagementRating && (
                         <p className="text-red-500 text-sm">
-                            {errors.ujaniFoodRating.message}
+                            {errors.ujaniManagementRating.message}
                         </p>
                     )}
 
@@ -116,15 +116,15 @@ export default function UjaniPage ({register, errors, watch, onBack, onNext, set
 
                 <div className="space-y-2">
 
-                    <Label htmlFor="ujaniHygieneRating">Hygiene Rating</Label>
+                    <Label htmlFor="ujaniEventsRating">Events Rating</Label>
                     <Select
                         onValueChange={(val) => {
-                            setValue("ujaniHygieneRating", val as RatingType);
+                            setValue("ujaniEventsRating", val as RatingType);
                         }}
                     >
 
                         <SelectTrigger>
-                            <SelectValue placeholder="Hygiene Rating"></SelectValue>
+                            <SelectValue placeholder="Events Rating"></SelectValue>
                         </SelectTrigger>
 
                         <SelectContent>
@@ -135,9 +135,9 @@ export default function UjaniPage ({register, errors, watch, onBack, onNext, set
 
                     </Select>
 
-                    {errors.ujaniHygieneRating && (
+                    {errors.ujaniEventsRating&& (
                         <p className="text-red-500 text-sm">
-                            {errors.ujaniHygieneRating.message}
+                            {errors.ujaniEventsRating.message}
                         </p>
                     )}
 
