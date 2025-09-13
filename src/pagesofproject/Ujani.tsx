@@ -25,7 +25,7 @@ export default function UjaniPage ({register, errors, watch, onBack, onNext, set
 
             <h2 className="text-xl font-semibold">Ujani</h2>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap">
 
                 <div className="space-y-2">
 

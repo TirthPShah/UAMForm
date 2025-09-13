@@ -927,7 +927,7 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
             <div className="flex items-center justify-between">
 
                 <Button type="button" onClick={onBack}>Back</Button>
-                <Button type="button" onClick={() => append(ChildAbove18DefaultData)}>Add Another Child Above 18</Button>
+                <Button type="button" onClick={() => append(ChildAbove18DefaultData)}>Add Child</Button>
                 <Button type="button" onClick={onNext}>Next</Button>
 
             </div>
