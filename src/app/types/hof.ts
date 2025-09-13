@@ -15,8 +15,8 @@ export interface HoFData {
     headOfFamilyCity: string;
     headOfFamilyState: string;
     headOfFamilyCountry: CountryType;
-    headOfFamilyLat: string;
-    headOfFamilyLon: string;
+    headOfFamilyLat?: string;
+    headOfFamilyLon?: string;
     headOfFamilyEducation: string;
     headOfFamilyProfession: ProfessionType;
     headOfFamilyDesignation?: string;
