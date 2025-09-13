@@ -19,7 +19,8 @@ export interface ChildAbove18Data {
     childAbove18Country: CountryType;
     childAbove18Education: string;
     childAbove18Profession: ProfessionType;
-    childAbove18StudyLevel?: "School" | "Diploma / Degree (Bachelors, Master, PHD)"
+    childAbove18StudyLevel?: "School" | "Diploma / Degree (Bachelors, Master, PHD)";
+    childAbove18StudyInstituteName?: string;
     childAbove18Grade?: "9" | "10" | "11" | "12";
     childAbove18Stream?: "Commerce" | "Science" | "Arts";
     childAbove18Degree?: string;
@@ -69,6 +70,7 @@ export const ChildAbove18DefaultData : ChildAbove18Data = {
     childAbove18Education: "",
     childAbove18Profession: "Employee",
     childAbove18StudyLevel: "School",
+    childAbove18StudyInstituteName: "",
     childAbove18Grade: "9",
     childAbove18Stream: "Science",
     childAbove18Degree: "",

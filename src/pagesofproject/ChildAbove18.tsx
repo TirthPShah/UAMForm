@@ -478,6 +478,21 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
 
                         )}
 
+                        {(watch(`childrenAbove18.${index}.childAbove18Profession`) === "Student" && watch(`childrenAbove18.${index}.childAbove18StudyLevel`) === "Diploma / Degree (Bachelors, Master, PHD)") && (
+                            <div className="space-y-2">
+                                <Label htmlFor={`childrenAbove18.${index}.childAbove18StudyInstituteName`}>Institute Name</Label>
+                                <Input 
+                                    id={`childrenAbove18.${index}.childAbove18StudyInstituteName`} 
+                                    {...register(`childrenAbove18.${index}.childAbove18StudyInstituteName`)} 
+                                    placeholder="Institute Name"
+                                />
+
+                                {errors.childrenAbove18?.[index]?.childAbove18StudyInstituteName && (
+                                    <p className="text-sm text-red-600">{errors.childrenAbove18[index]?.childAbove18StudyInstituteName?.message}</p>
+                                )}
+                            </div>
+                        )}
+
                         {watch(`childrenAbove18.${index}.childAbove18Profession`) !== "Student" && (
 
                             <div className="space-y-2">
