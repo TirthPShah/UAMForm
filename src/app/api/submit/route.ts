@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import { Readable } from "stream";
+import clientPromise from "@/lib/mongodb";
 
 const oauth = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
@@ -98,10 +99,19 @@ export async function POST(req: Request) {
 
         const json = await formDataToJson(formData, folderId as string);
 
+        const client = await clientPromise;
+        const db = client.db("UAMForm");
+        const collection = db.collection("uam-form");
+
+        await collection.insertOne({
+            ...json,
+            createdAt: new Date(),
+        });
+
         console.log("After Google Drive");
         console.dir(json, {depth : null})
 
-        return NextResponse.json({ success: true, message: "Data received!" });
+        return NextResponse.json({ success: true, message: "Data stored successfully!" });
     } catch (err) {
         console.error("Error parsing FormData:", err);
         return NextResponse.json({ success: false, error: "Invalid form data" }, { status: 400 });
