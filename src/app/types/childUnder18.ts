@@ -21,10 +21,7 @@ export const defaultChildUnder18Data : ChildUnder18Data = {
     childUnder18DateOfBirth: "",
     childUnder18Gender: "Male",
     childUnder18PlaceOfStudy: "School",
-    childUnder18Grade: "1",
     childUnder18StudyInstituteName: "",
-    childUnder18Stream: "Science",
-    childUnder18DiplomaSpecialization: "IT",
     childUnder18MobileNumber: "",
     childUnder18Hobbies: ""
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { FieldErrors, UseFormRegister, UseFormWatch, UseFormSetValue } from "react-hook-form";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,11 @@ import { BloodGroupType, CountryType, MaritalStatusType, MembershipType, Profess
 import { countries } from "@/app/options";
 
 interface HoFPageProps {
-    register: UseFormRegister<FormData>;
-    errors: FieldErrors<FormData>;
-    watch: UseFormWatch<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
+    watch: UseFormWatch<UAMFormData>;
     onNext: () => void;
-    setValue: UseFormSetValue<FormData>;
+    setValue: UseFormSetValue<UAMFormData>;
 }
 
 export default function HoFPageDetails ({register, errors, watch, onNext, setValue} : HoFPageProps) {

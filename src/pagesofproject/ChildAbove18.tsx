@@ -1,7 +1,7 @@
 "use client";
 
 import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch, Control, useFieldArray } from "react-hook-form";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,13 +11,13 @@ import { countries, CountryType, MaritalStatusType, ProfessionType } from "@/app
 import { ChildAbove18DefaultData } from "@/app/types/childAbove18";
 
 interface ChildAbove18PageProps {
-    register: UseFormRegister<FormData>;
-    control: Control<FormData>;
-    errors: FieldErrors<FormData>;
-    watch: UseFormWatch<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    control: Control<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
+    watch: UseFormWatch<UAMFormData>;
     onBack: () => void;
     onNext: () => void;
-    setValue: UseFormSetValue<FormData>;
+    setValue: UseFormSetValue<UAMFormData>;
 }
 
 export default function ChildAbove18Page({ register, control, errors, watch, onBack, onNext, setValue }: ChildAbove18PageProps) {
@@ -34,6 +34,13 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
             <h2 className="text-xl font-semibold">Step 4 : Children Above 18 Details</h2>
 
             {fields.map((field, index) => {
+
+                if(watch(`childrenAbove18.${index}.childAbove18AddressSameAsParents`) === "Yes") {
+                    setValue(`childrenAbove18.${index}.childAbove18Address`, watch("headOfFamilyAddress"));
+                    setValue(`childrenAbove18.${index}.childAbove18City`, watch("headOfFamilyCity"));
+                    setValue(`childrenAbove18.${index}.childAbove18State`, watch("headOfFamilyState"));
+                    setValue(`childrenAbove18.${index}.childAbove18Country`, watch("headOfFamilyCountry"));
+                }
 
                 return (
 
@@ -80,9 +87,8 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
                                     <SelectValue placeholder="Select Gender" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="male">Male</SelectItem>
-                                    <SelectItem value="female">Female</SelectItem>
-                                    <SelectItem value="other">Other</SelectItem>
+                                    <SelectItem value="Male">Male</SelectItem>
+                                    <SelectItem value="Female">Female</SelectItem>
                                 </SelectContent>
                             </Select>
 
@@ -553,9 +559,10 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
 
                             <div className="space-y-2">
 
-                                <Label htmlFor={`childrenAbove18.${index}.childAbove18BusinessDocs`}>Business Registration Docs (if any)</Label>
+                                <Label htmlFor={`childrenAbove18.${index}.childAbove18BusinessDocs`}>Business Docs for advertisements (if any)</Label>
                                 <Input 
                                     type="file"
+                                    multiple
                                     id={`childrenAbove18.${index}.childAbove18BusinessDocs`} 
                                     {...register(`childrenAbove18.${index}.childAbove18BusinessDocs`)} 
                                 />
@@ -640,25 +647,6 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
 
                                 {errors.childrenAbove18?.[index]?.childAbove18SpouseDateOfBirth && (
                                     <p className="text-sm text-red-600">{errors.childrenAbove18[index]?.childAbove18SpouseDateOfBirth?.message}</p>
-                                )}
-
-                            </div>
-
-                        )}
-
-                        {watch(`childrenAbove18.${index}.childAbove18MaritalStatus`) !== "Single" && (
-
-                            <div className="space-y-2">
-
-                                <Label htmlFor={`childrenAbove18.${index}.childAbove18SpouseAge`}>Spouse Age</Label>
-                                <Input 
-                                    type="number"
-                                    id={`childrenAbove18.${index}.childAbove18SpouseAge`} 
-                                    {...register(`childrenAbove18.${index}.childAbove18SpouseAge`, { valueAsNumber: true })} 
-                                />
-
-                                {errors.childrenAbove18?.[index]?.childAbove18SpouseAge && (
-                                    <p className="text-sm text-red-600">{errors.childrenAbove18[index]?.childAbove18SpouseAge?.message}</p>
                                 )}
 
                             </div>
@@ -880,9 +868,10 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
 
                             <div className="space-y-2">
 
-                                <Label htmlFor={`childrenAbove18.${index}.childAbove18SpouseBusinessDocs`}>Spouse Business Registration Docs (if any)</Label>
+                                <Label htmlFor={`childrenAbove18.${index}.childAbove18SpouseBusinessDocs`}>Spouse Business Docs for advertisements (if any)</Label>
                                 <Input 
                                     type="file"
+                                    multiple
                                     id={`childrenAbove18.${index}.childAbove18SpouseBusinessDocs`} 
                                     {...register(`childrenAbove18.${index}.childAbove18SpouseBusinessDocs`)} 
                                 />

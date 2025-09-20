@@ -8,13 +8,13 @@ import { SurveyedByData, SurveyedByDefaultData } from "./surveyedBy";
 import { UjaniData, ujaniDefaultData } from "./ujani";
 import { UjaniFutureIdeasData, UjaniFutureIdeasDefaultData } from "./ujaniFutureIdeas";
 
-export type FormData = HoFData & SpouseData & {
+export type UAMFormData = HoFData & SpouseData & {
     childrenUnder18?: ChildUnder18Data[]
 } & {
     childrenAbove18?: ChildAbove18Data[]
 } & UjaniData & UjaniFutureIdeasData & SupportAndEventsData & ExtrasData & SurveyedByData;
 
-export const defaultFormData : FormData = {
+export const defaultUAMFormData : UAMFormData = {
     ...defaultHoFData,
     ...defaultSpouseData,
     childrenUnder18: [defaultChildUnder18Data],

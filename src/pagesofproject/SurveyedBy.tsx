@@ -1,18 +1,18 @@
 "use client"
 
 import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
 interface SurveyedByProps {
-    register: UseFormRegister<FormData>;
-    errors: FieldErrors<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
     onBack: () => void;
     onNext: () => void;
-    setValue: UseFormSetValue<FormData>;
+    setValue: UseFormSetValue<UAMFormData>;
 }
 
 export default function SurveyedByPage ({register, errors, onBack, onNext, setValue} : SurveyedByProps) {

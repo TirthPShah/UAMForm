@@ -1,7 +1,7 @@
 "use client";
 
 import { UseFormRegister, UseFormWatch, UseFormSetValue, FieldErrors } from "react-hook-form";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,12 +9,12 @@ import { Label } from "@/components/ui/label";
 import { RatingType } from "@/app/options";
 
 interface UjaniPageProps {
-    register: UseFormRegister<FormData>;
-    errors: FieldErrors<FormData>;
-    watch: UseFormWatch<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
+    watch: UseFormWatch<UAMFormData>;
     onBack: () => void;
     onNext: () => void;
-    setValue: UseFormSetValue<FormData>;
+    setValue: UseFormSetValue<UAMFormData>;
 }
 
 export default function UjaniPage ({register, errors, watch, onBack, onNext, setValue } : UjaniPageProps) {

@@ -22,14 +22,13 @@ export interface HoFData {
     headOfFamilyDesignation?: string;
     headOfFamilyOrganisation?: string;
     headOfFamilyBusinessAddress?: string;
-    headOfFamilyBusinessDocs?: FileList | null;
-    headOfFamilyPhoto: File | null;
+    headOfFamilyBusinessDocs?: FileList | string | null;
+    headOfFamilyPhoto: File | string | null;
     headOfFamilyBloodGroup: BloodGroupType;
     headOfFamilyBloodGroupOthers?: string;
     headOfFamilyIsBloodDonor: "Yes" | "No";
     headOfFamilyHobbies?: string;
     headOfFamilyExtraNotes?: string;
-    headOfFamilyAge: number | null;
 
 }
 
@@ -49,16 +48,9 @@ export const defaultHoFData: HoFData = {
   headOfFamilyCity: "",
   headOfFamilyState: "",
   headOfFamilyCountry: "India",            // or null if strict
-  headOfFamilyLat: "",
-  headOfFamilyLon: "",
   headOfFamilyEducation: "",
   headOfFamilyProfession: "Employee",
   headOfFamilyPhoto: null,
   headOfFamilyBloodGroup: "O+",            // pick a common default
-  headOfFamilyBloodGroupOthers: "",
   headOfFamilyIsBloodDonor: "No",
-  headOfFamilyHobbies: "",
-  headOfFamilyExtraNotes: "",
-  headOfFamilyAge: null,
-
 };

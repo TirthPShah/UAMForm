@@ -14,7 +14,7 @@ export interface SpouseData {
     spouseDesignation?: string;
     spouseOrganisation?: string;
     spouseBusinessAddress?: string;
-    spouseBusinessDocs?: FileList | null;
+    spouseBusinessDocs?: FileList | string | null;
     spouseHobbies?: string;
     spouseExtraNotes?: string;
 

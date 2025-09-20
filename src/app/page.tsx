@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { FormData } from "./types/type";
+import { UAMFormData } from "./types/type";
 import { Card } from "@/components/ui/card";
 import { defaultHoFData } from "./types/hof";
 import HoFPageDetails from "@/pagesofproject/HoF";
@@ -19,13 +19,73 @@ export default function Home() {
 
     const [step, setStep] = useState(0);
 
-    const {register, handleSubmit, setValue, formState: { errors }, watch, control} = useForm<FormData>({
+    const {register, handleSubmit, setValue, formState: { errors }, watch, control} = useForm<UAMFormData>({
         defaultValues: defaultHoFData,
         mode: "onChange"
     });
 
-    const onSubmit: SubmitHandler<FormData> = (data) => {
-        console.log(data);
+    const appendFormData = (
+        formData: FormData,
+        data: any,
+        parentKey?: string
+        ): void => {
+        if (data === null || data === undefined) {
+            formData.append(parentKey ?? "", "");
+            return;
+        }
+
+        if (data instanceof File) {
+            formData.append(parentKey ?? data.name, data);
+            return;
+        }
+
+        if (data instanceof FileList) {
+            Array.from(data).forEach((file, index) => {
+            formData.append(parentKey ? `${parentKey}[${index}]` : file.name, file);
+            });
+            return;
+        }
+
+        if (Array.isArray(data)) {
+            data.forEach((value, index) => {
+            appendFormData(formData, value, parentKey ? `${parentKey}[${index}]` : `${index}`);
+            });
+            return;
+        }
+
+        if (typeof data === "object" && !(data instanceof Date)) {
+            Object.keys(data).forEach((key) => {
+            appendFormData(
+                formData,
+                data[key],
+                parentKey ? `${parentKey}[${key}]` : key
+            );
+            });
+            return;
+        }
+
+        if (data instanceof Date) {
+            formData.append(parentKey ?? "", data.toISOString());
+            return;
+        }
+
+        formData.append(parentKey ?? "", String(data));
+    };
+
+    const onSubmit: SubmitHandler<UAMFormData> = async (data) => {
+
+        // We will convert the data to FormData object to send files
+        const formData = new FormData();
+
+        // Recursive function to append data to formData
+        appendFormData(formData, data);
+
+        const res = await fetch("/api/submit", {
+            method: "POST",
+            body: formData,
+        })
+
+        const result = res.json();
     };
 
     const hoFNext = async () => {
@@ -38,25 +98,6 @@ export default function Home() {
                     setValue("headOfFamilyLon", longitude.toString());
                 }
             )
-        }
-
-        const dob = watch("headOfFamilyDateOfBirth");
-
-        if(dob) {
-
-            const birthDate = new Date(dob);
-            const today = new Date();
-
-            let age = today.getFullYear() - birthDate.getFullYear()
-
-            const monthDiff = today.getMonth() - birthDate.getMonth()
-
-            if(monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-
-            setValue("headOfFamilyAge", age);
-
         }
 
         const maritalStatus = watch("headOfFamilyMaritalStatus");

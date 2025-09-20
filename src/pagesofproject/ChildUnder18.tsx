@@ -7,15 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { defaultChildUnder18Data } from "@/app/types/childUnder18";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { grades, GradeType } from "@/app/options";
 
 interface ChildUnder18Props {
-    register: UseFormRegister<FormData>;
-    control: Control<FormData>;
-    setValue: UseFormSetValue<FormData>;
-    watch: UseFormWatch<FormData>;
-    errors: FieldErrors<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    control: Control<UAMFormData>;
+    setValue: UseFormSetValue<UAMFormData>;
+    watch: UseFormWatch<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
     onNext: () => void;
     onBack: () => void;
 }

@@ -1,14 +1,14 @@
 "use client";
 
 import { UseFormRegister, FieldErrors } from "react-hook-form";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 interface ExtrasPageProps {
-    register: UseFormRegister<FormData>;
-    errors: FieldErrors<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
     onBack: () => void;
     onNext: () => void;
 }

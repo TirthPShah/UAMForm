@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldErrors, UseFormRegister, UseFormWatch, UseFormSetValue } from "react-hook-form";
-import { FormData } from "@/app/types/type";
+import { UAMFormData } from "@/app/types/type";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -11,10 +11,10 @@ import { BloodGroupType, ProfessionType } from "@/app/options";
 
 interface SpousePageProps {
 
-    register: UseFormRegister<FormData>;
-    setValue: UseFormSetValue<FormData>;
-    errors: FieldErrors<FormData>;
-    watch: UseFormWatch<FormData>;
+    register: UseFormRegister<UAMFormData>;
+    setValue: UseFormSetValue<UAMFormData>;
+    errors: FieldErrors<UAMFormData>;
+    watch: UseFormWatch<UAMFormData>;
     onNext: () => void;
     onBack: () => void;
 
@@ -109,23 +109,6 @@ export default function SpousePageDetails ({register, setValue, errors, watch, o
                 )}
                 
             </div>      
-
-            <div className="space-y-2">
-
-                <Label htmlFor="spouseDateOfBirth">Date of Birth</Label>
-                <Input
-                    id="spouseDateOfBirth"
-                    type="date"
-                    {...register("spouseDateOfBirth")}
-                />
-
-                {errors.spouseDateOfBirth && (
-                    <p className="text-red-500 text-sm">
-                        {errors.spouseDateOfBirth.message}
-                    </p>
-                )}
-                
-            </div>  
 
             <div className="space-y-2">
             
