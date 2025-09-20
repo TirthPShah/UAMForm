@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 import { UAMFormData } from "./types/type";
 import { Card } from "@/components/ui/card";
 import { defaultHoFData } from "./types/hof";
@@ -73,19 +74,38 @@ export default function Home() {
     };
 
     const onSubmit: SubmitHandler<UAMFormData> = async (data) => {
-
         // We will convert the data to FormData object to send files
         const formData = new FormData();
 
         // Recursive function to append data to formData
         appendFormData(formData, data);
 
-        const res = await fetch("/api/submit", {
-            method: "POST",
-            body: formData,
-        })
+        // Show uploading toast
+        toast('Data upload in progress (Estimated time : 40 seconds)...', {
+            duration: 5000,
+            style: { background: '#666', color: 'white' },
+        });
 
-        const result = res.json();
+        try {
+            const res = await fetch("/api/submit", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (res.ok) { // Status code 2XX
+                toast.success('Data uploaded successfully!', {
+                    duration: 5000,
+                });
+            } else {
+                toast.error(`Upload failed: ${res.statusText}`, {
+                    duration: 5000,
+                });
+            }
+        } catch (error) {
+            toast.error('Upload failed: Network error', {
+                duration: 5000,
+            });
+        }
     };
 
     const hoFNext = async () => {
