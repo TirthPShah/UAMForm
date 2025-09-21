@@ -1,6 +1,6 @@
 "use client";
 
-import { UseFormRegister, UseFormWatch, UseFormSetValue, FieldErrors } from "react-hook-form";
+import { UseFormRegister, UseFormWatch, UseFormSetValue, FieldErrors, Controller, Control } from "react-hook-form";
 import { UAMFormData } from "@/app/types/type";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,7 @@ interface SupportAndEventsPageProps {
     register: UseFormRegister<UAMFormData>;
     errors: FieldErrors<UAMFormData>;
     watch: UseFormWatch<UAMFormData>;
+    control: Control<UAMFormData>;
     onBack: () => void;
     onNext: () => void;
     setValue: UseFormSetValue<UAMFormData>;
@@ -27,7 +28,7 @@ const supportOptions : SupportType[] = [
     "Others",
 ]
 
-export default function SupportAndEventsPage({register, errors, watch, onBack, onNext, setValue } : SupportAndEventsPageProps) {
+export default function SupportAndEventsPage({register, errors, watch, onBack, onNext, control, setValue } : SupportAndEventsPageProps) {
 
     return (
 
@@ -114,7 +115,37 @@ export default function SupportAndEventsPage({register, errors, watch, onBack, o
                     
                     <Label htmlFor="supportAndEventsWillingSupportTypes">If yes, how? (Select all that Apply)</Label>
 
-                    {supportOptions.map((option) => (
+                    <Controller
+                        name="supportAndEventsWillingSupportTypes"
+                        control = {control}
+                        defaultValue={[]}
+                        render={({ field}) => (
+                            <div className="space-y-1">
+
+                                {supportOptions.map((option) => (
+                                    <div className="flex items-center space-x-2" key={option}>
+                                        <input type="checkbox" id={`supportAndEventsWillingSupportTypes-${option}`} value={option} checked={(field.value || []).includes(option)} 
+                                            onChange={(e) => {
+
+                                                const current = field.value || [];
+                                                if(e.target.checked) {
+                                                    field.onChange([...current, option]);
+                                                } else {
+                                                    field.onChange(current.filter((val : SupportType) => val !== option));
+                                                }
+                                            }}
+                                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                        />
+                                        <label htmlFor={`supportAndEventsWillingSupportTypes-${option}`} className="text-sm">
+                                            {option}
+                                        </label>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    />
+
+                    {/* {supportOptions.map((option) => (
                         <div key={option} className="flex items-center space-x-2">
                             <input
                                 type="checkbox"
@@ -127,7 +158,7 @@ export default function SupportAndEventsPage({register, errors, watch, onBack, o
                                 {option}
                             </label>
                         </div>
-                    ))}
+                    ))} */}
 
                     {errors.supportAndEventsWillingSupportTypes && (
                         <p className="text-red-500 text-sm">

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
-import { UAMFormData } from "./types/type";
+import { defaultUAMFormData, UAMFormData } from "./types/type";
 import { Card } from "@/components/ui/card";
 import { defaultHoFData } from "./types/hof";
 import HoFPageDetails from "@/pagesofproject/HoF";
@@ -21,7 +21,7 @@ export default function Home() {
     const [step, setStep] = useState(0);
 
     const {register, handleSubmit, setValue, formState: { errors }, watch, control} = useForm<UAMFormData>({
-        defaultValues: defaultHoFData,
+        defaultValues: defaultUAMFormData,
         mode: "onChange"
     });
 
@@ -217,6 +217,7 @@ export default function Home() {
                         register={register}
                         errors={errors}
                         watch={watch}
+                        control={control}
                         setValue={setValue}
                         onBack={() => {setStep(5)}}
                         onNext={() => {setStep(7)}}

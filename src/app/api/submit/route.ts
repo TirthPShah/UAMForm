@@ -7,7 +7,7 @@ import clientPromise from "@/lib/mongodb";
 const oauth = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,
-    "http://uam-form.vercel.app/oauth"
+    "https://uam-form.vercel.app/oauth"
 )
 
 oauth.setCredentials({
@@ -114,6 +114,6 @@ export async function POST(req: Request) {
         return NextResponse.json({ success: true, message: "Data stored successfully!" });
     } catch (err) {
         console.error("Error parsing FormData:", err);
-        return NextResponse.json({ success: false, error: "Invalid form data" }, { status: 400 });
+        return NextResponse.json({ success: false, error: err }, { status: 400 });
     }
 }
