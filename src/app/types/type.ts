@@ -6,13 +6,12 @@ import { defaultSpouseData, SpouseData } from "./spouse";
 import { SupportAndEventsData, SupportAndEventsDefaultData } from "./supportAndEvents";
 import { SurveyedByData, SurveyedByDefaultData } from "./surveyedBy";
 import { UjaniData, ujaniDefaultData } from "./ujani";
-import { UjaniFutureIdeasData, UjaniFutureIdeasDefaultData } from "./ujaniFutureIdeas";
 
 export type UAMFormData = HoFData & SpouseData & {
     childrenUnder18?: ChildUnder18Data[]
 } & {
     childrenAbove18?: ChildAbove18Data[]
-} & UjaniData & UjaniFutureIdeasData & SupportAndEventsData & ExtrasData & SurveyedByData;
+} & UjaniData  & SupportAndEventsData & ExtrasData & SurveyedByData;
 
 export const defaultUAMFormData : UAMFormData = {
     ...defaultHoFData,
@@ -20,7 +19,6 @@ export const defaultUAMFormData : UAMFormData = {
     childrenUnder18: [defaultChildUnder18Data],
     childrenAbove18: [ChildAbove18DefaultData],
     ...ujaniDefaultData,
-    ...UjaniFutureIdeasDefaultData,
     ...SupportAndEventsDefaultData,
     ...ExtrasDefaultData,
     ...SurveyedByDefaultData

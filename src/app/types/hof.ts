@@ -12,6 +12,7 @@ export interface HoFData {
     headOfFamilySecondaryMobile?: string;
     headOfFamilyMaritalStatus: MaritalStatusType;
     headOfFamilyAddress: string;
+    headOfFamilyPinCode: string;
     headOfFamilyCity: string;
     headOfFamilyState: string;
     headOfFamilyCountry: CountryType;
@@ -45,8 +46,9 @@ export const defaultHoFData: HoFData = {
   headOfFamilySecondaryMobile: "",
   headOfFamilyMaritalStatus: "Married - Within Samaj",     // sensible default
   headOfFamilyAddress: "",
-  headOfFamilyCity: "",
-  headOfFamilyState: "",
+  headOfFamilyPinCode: "",
+  headOfFamilyCity: "Ahmedabad",
+  headOfFamilyState: "Gujarat",
   headOfFamilyCountry: "India",            // or null if strict
   headOfFamilyEducation: "",
   headOfFamilyProfession: "Employee",

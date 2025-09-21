@@ -8,6 +8,7 @@ export interface UjaniData {
     ujaniEventsRating: RatingType;
     ujaniAttendedRegularly: "Yes" | "No";
     ujaniNotAttendedRegularlyReason?: string;
+    ujaniFutureIdeasSuggestions: string;
     ujaniExtraNotes: string;
 
 }
@@ -20,6 +21,7 @@ export const ujaniDefaultData : UjaniData = {
     ujaniEventsRating: "Excellent",
     ujaniAttendedRegularly: "Yes",
     ujaniNotAttendedRegularlyReason: "",
+    ujaniFutureIdeasSuggestions: "",
     ujaniExtraNotes: ""
     
 }

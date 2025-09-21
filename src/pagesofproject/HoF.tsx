@@ -218,6 +218,17 @@ export default function HoFPageDetails ({register, errors, watch, onNext, setVal
 
             <div className="space-y-2">
 
+                <Label htmlFor="headOfFamilyPinCode">Pin Code</Label>
+                <Input
+                id="headOfFamilyPinCode"
+                placeholder="Enter pin code"
+                {...register("headOfFamilyPinCode")}
+                />
+
+            </div>
+
+            <div className="space-y-2">
+
                 <Label htmlFor="headOfFamilyCity">City</Label>
                 <Input
                 id="headOfFamilyCity"

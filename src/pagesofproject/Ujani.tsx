@@ -325,6 +325,23 @@ export default function UjaniPage ({register, errors, watch, onBack, onNext, set
                 )}
             </div>
 
+            <div className="space-y-2">
+
+                <Label htmlFor="ujaniFutureIdeasSuggestions">Suggestion for Future Ujani</Label>
+                <Textarea
+                    id="ujaniFutureIdeasSuggestions"
+                    placeholder="Suggestions"
+                    {...register("ujaniFutureIdeasSuggestions")}
+                />
+
+                {errors.ujaniFutureIdeasSuggestions && (
+                    <p className="text-red-500 text-sm">
+                        {errors.ujaniFutureIdeasSuggestions.message}
+                    </p>
+                )}
+
+            </div>
+
             <div className="flex justify-between pt-4">
 
                 <Button type="button" onClick={onBack}>
