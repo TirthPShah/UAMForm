@@ -20,6 +20,7 @@
     "googleapis": "^160.0.0",
     "lucide-react": "^0.542.0",
     "mongodb": "^6.20.0",
+    "mongoose": "^8.18.2",
     "multer": "^2.0.2",
     "next": "15.4.6",
     "react": "19.1.0",

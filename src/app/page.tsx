@@ -328,20 +328,11 @@ export default function Home() {
                     )}
 
                     {step === 7 && (
-                        <ExtrasPage
-                            register={register}
-                            errors={errors}
-                            onBack={() => handleStepChange(6)}
-                            onNext={() => handleStepChange(8)}
-                        />
-                    )}
-
-                    {step === 8 && (
                         <SurveyedByPage
                             register={register}
                             errors={errors}
                             setValue={setValue}
-                            onBack={() => handleStepChange(7)}
+                            onBack={() => handleStepChange(6)}
                             onNext={handleSubmit(onSubmit)}
                         />
                     )}
@@ -368,15 +359,21 @@ export default function Home() {
                         <AlertDialogTitle>Data Submitted Successfully!</AlertDialogTitle>
                         <AlertDialogDescription>
                             Would you like to keep this data saved for the next person's entry, or clear it to start fresh?
+                            <br /><br />
+                            <b>Reload the page after clicking the button</b>
+                            <br />
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel onClick={handleKeepDataForNext}>
-                            Keep Data for Next Person
-                        </AlertDialogCancel>
-                        <AlertDialogAction onClick={handleClearDataForNext}>
-                            Clear Data for New Person
-                        </AlertDialogAction>
+
+                        <div className="flex gap-6 sm:flex-row flex-col">
+                            <AlertDialogCancel onClick={handleKeepDataForNext}>
+                                Keep Data for Next Person
+                            </AlertDialogCancel>
+                            <AlertDialogAction onClick={handleClearDataForNext}>
+                                Clear Data for New Person
+                            </AlertDialogAction>
+                        </div>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

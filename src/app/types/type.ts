@@ -16,8 +16,8 @@ export type UAMFormData = HoFData & SpouseData & {
 export const defaultUAMFormData : UAMFormData = {
     ...defaultHoFData,
     ...defaultSpouseData,
-    childrenUnder18: [defaultChildUnder18Data],
-    childrenAbove18: [ChildAbove18DefaultData],
+    childrenUnder18: [],
+    childrenAbove18: [],
     ...ujaniDefaultData,
     ...SupportAndEventsDefaultData,
     ...ExtrasDefaultData,

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { countries, CountryType, MaritalStatusType, ProfessionType } from "@/app/options";
 import { ChildAbove18DefaultData } from "@/app/types/childAbove18";
+import { useState } from "react";
 
 interface ChildAbove18PageProps {
     register: UseFormRegister<UAMFormData>;
@@ -26,6 +27,32 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
         control,
         name: "childrenAbove18"
     });
+
+    const [tempNumber, setTempNumber] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false);
+
+    const handleGetTempNumber = async (index : number) => {
+
+        if(loading || (tempNumber !== "")) return;
+
+        setLoading(true);
+
+        const name = watch(`childrenAbove18.${index}.childAbove18Name`) || "";
+        const letter = name !== "" ? name.trim()[0].toUpperCase() : "X";
+
+        const res = await fetch("/api/getTempNum", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ initialLetter: letter })
+        });
+
+        const data = await res.json();
+
+        setTempNumber(data.tempNumber);
+        setLoading(false);
+        setValue(`childrenAbove18.${index}.childAbove18MembershipNumber`, data.tempNumber);
+
+    };
 
     return (
 
@@ -615,6 +642,36 @@ export default function ChildAbove18Page({ register, control, errors, watch, onB
                             )}
 
                         </div>
+
+
+                        {watch(`childrenAbove18.${index}.childAbove18MaritalStatus`) !== "Single" && 
+                        watch(`childrenAbove18.${index}.childAbove18IsMember`) === "No" && (
+                            <div className="space-y-2">
+                                <Label htmlFor={`childrenAbove18.${index}.childAbove18TempNum`}>Temporary Number</Label>
+                                <div className="flex gap-4 items-center">
+                                    <div>
+                                        <Input
+                                            id={`childrenAbove18.${index}.childAbove18TempNum`}
+                                            value={tempNumber || ""}
+                                            disabled
+                                            className="bg-gray-100"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <Button
+                                            type="button"
+                                            disabled={loading || !!tempNumber}
+                                            onClick={() => handleGetTempNumber(index)}
+                                        >
+                                            {loading ?  "Generating...." : "Get Temporary Number"}
+                                            
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        
 
                         {watch(`childrenAbove18.${index}.childAbove18MaritalStatus`) !== "Single" && (
 
