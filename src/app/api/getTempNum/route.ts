@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import TempMemberCounter from "@/app/models/TempMemberCounter";
 import clientPromise from "@/lib/mongodb";
 
 export async function POST(req:Request) {

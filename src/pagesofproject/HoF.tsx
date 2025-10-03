@@ -9,7 +9,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { BloodGroupType, CountryType, MaritalStatusType, MembershipType, ProfessionType } from "@/app/options";
 import { countries } from "@/app/options";
-
+import { useCallback } from "react";
+import { cn } from "@/lib/utils";
+import { FileDropzone } from "@/components/ui/file-dropzone";
 interface HoFPageProps {
     register: UseFormRegister<UAMFormData>;
     errors: FieldErrors<UAMFormData>;
@@ -480,20 +482,19 @@ export default function HoFPageDetails ({register, errors, watch, onNext, setVal
             )}
             
             <div className="space-y-2">
-
                 <Label htmlFor="headOfFamilyPhoto">Photo</Label>
-                <Input
-                id="headOfFamilyPhoto"
-                type="file"
-                accept="image/*"
-                onChange={(e) => setValue("headOfFamilyPhoto", e.target.files?.[0] || null)}
+                <FileDropzone
+                    id="headOfFamilyPhoto"
+                    accept={{
+                        'image/*': ['.jpeg', '.jpg', '.png', '.gif', '.tiff']
+                    }}
+                    onFileChange={(files) => setValue("headOfFamilyPhoto", files[0] || null)}
                 />
-
                 {errors.headOfFamilyPhoto && (
-                <p className="text-red-500 text-sm">{errors.headOfFamilyPhoto.message}</p>
+                    <p className="text-red-500 text-sm">{errors.headOfFamilyPhoto.message}</p>
                 )}
-                
             </div>
+
 
             <div className="space-y-2">
 
